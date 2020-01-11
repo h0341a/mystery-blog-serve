@@ -1,13 +1,13 @@
 # Project build notes.
 ### Maven
 + dependency:   
-//Java web auto configuration module provided by springboot   
+*//Java web auto configuration module provided by springboot*
 spring-boot-starter-web  
-//swagger module   
+*//swagger module*   
 springfox-swagger2   
-//good ui module by swagger   
+*//good ui module by swagger*   
 springfox-swagger-ui   
-//tool to spice up java  
+*//tool to spice up java*  
 lombok
 ## usage notes
 + use swagger intro:   
