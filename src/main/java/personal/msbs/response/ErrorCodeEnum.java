@@ -4,13 +4,15 @@ import lombok.Getter;
 
 /**
  * @author ling
+ *400为客户端相关的错误信息
  */
 @Getter
 public enum  ErrorCodeEnum {
     /**
-     * 404 服务器找不到客户机器所发出的请求.
+     * 400 客户端发出的请求出错
      */
-    NOT_FOUND("404", "API接口不存在"),
+    PARAMETER_NOT_NULL("401", "参数不能为空"),
+    USER_CHECKING_FAIL("402", "账号或密码错误")
     ;
     private String code;
     private String msg;

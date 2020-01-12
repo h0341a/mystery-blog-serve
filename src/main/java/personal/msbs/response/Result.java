@@ -1,10 +1,15 @@
 package personal.msbs.response;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.io.Serializable;
 
 /**
  * @author ling
  */
+@Getter
+@Setter
 public class Result implements Serializable {
 
     /**
@@ -14,7 +19,7 @@ public class Result implements Serializable {
     /**
      * 服务器当前timestamp
      */
-    private Long ts = System.currentTimeMillis();
+    private Long timestamp = System.currentTimeMillis();
     /**
      * 成功时返回的数据
      */
