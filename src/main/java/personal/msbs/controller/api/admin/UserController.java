@@ -21,7 +21,7 @@ import java.security.NoSuchAlgorithmException;
  */
 @Api(tags = "管理员用户的相关操作")
 @RestController
-@RequestMapping("/admin")
+@RequestMapping("/api/admin/user")
 public class UserController {
 
     private final UserService userService;
