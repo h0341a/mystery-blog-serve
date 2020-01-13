@@ -4,6 +4,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -45,7 +46,22 @@ public class UserController {
         }
         req.getSession().setAttribute("uid", uid);
         req.getSession().setAttribute("username", username);
-        return Result.ofSuccess(null);
+        return Result.ofSuccess("登录成功");
+    }
+
+    @ApiOperation("用户注销接口")
+    @GetMapping("/logout")
+    public Result logout(){
+        //判断session是否保存了用户id
+        Object uid = req.getSession().getAttribute("uid");
+        if(uid == null){
+            return Result.ofFail(ErrorCodeEnum.USER_NOT_LOGIN);
+        }else{
+            //session失效
+            req.getSession().invalidate();
+            return Result.ofSuccess("注销成功");
+        }
+
     }
 
 }
