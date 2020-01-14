@@ -19,4 +19,7 @@
     <select id="selectByCategory" resultMap="BaseResultMap">
         SELECT * FROM blog WHERE category_id=#{categoryId}
     </select>
+    <select id="selectContentById" resultType="string">
+        SELECT content FROM blog WHERE bid=#{bid}
+    </select>
 </mapper>

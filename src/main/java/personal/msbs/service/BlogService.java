@@ -37,4 +37,11 @@ public interface BlogService {
      * @return 返回分类名字列表
      */
     public List<String> getCategoryList();
+
+    /**
+     * 根据博客id获取博客内容
+     * @param bid 博客id
+     * @return 返回博客内容
+     */
+    public String getBlog(int bid);
 }

@@ -52,6 +52,11 @@ public class BlogServiceImpl implements BlogService {
         return categoryDAO.select();
     }
 
+    @Override
+    public String getBlog(int bid) {
+        return blogDao.selectContentById(bid);
+    }
+
     /**
      * 将blogDto对象转换为Blog对象
      *

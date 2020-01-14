@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Api(tags = "管理员对博客进行编辑的api接口")
 @RestController
-@RequestMapping("/api/admin/blog")
+@RequestMapping("/api/admin/")
 public class BlogEditController {
     private final HttpServletRequest req;
     private final BlogService blogService;

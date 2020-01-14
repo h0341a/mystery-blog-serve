@@ -47,4 +47,9 @@ public class BlogInfoController {
         List<BlogInfoVo> blogInfoVoList = blogService.getBlogList();
         return Result.ofSuccess(blogInfoVoList);
     }
+    @ApiOperation("根据博客id获取博客内容")
+    @GetMapping("/blog/{bid}")
+    public Result blog(@PathVariable int bid){
+        return Result.ofSuccess(blogService.getBlog(bid));
+    }
 }

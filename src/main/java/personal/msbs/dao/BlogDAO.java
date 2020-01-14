@@ -17,6 +17,12 @@ public interface BlogDAO {
     public List<Blog> select();
 
     /**
+     * 根据主键即博客id获取博客信息
+     * @param bid 博客id
+     * @return 返回获取到的博客
+     */
+    public String selectContentById(int bid);
+    /**
      * 根据分类id获取博客列表
      * @param categoryId 分类id
      * @return 获取到的blog列表
