@@ -3,11 +3,19 @@ package personal.msbs.dao;
 import org.springframework.stereotype.Repository;
 import personal.msbs.model.entity.Category;
 
+import java.util.List;
+
 /**
  * @author ling
  */
 @Repository
 public interface CategoryDAO {
+
+    /**
+     * 获取所有分类信息
+     * @return 返回结果集
+     */
+    public List<String> select();
 
     /**
      * 根据名字查询分组

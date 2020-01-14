@@ -15,4 +15,7 @@
     <select id="selectById" resultMap="BaseResultMap">
         SELECT * FROM blog_category WHERE id=#{id}
     </select>
+    <select id="select" resultType="string">
+        SELECT name FROM blog_category
+    </select>
 </mapper>

@@ -11,8 +11,9 @@ import java.util.Date;
 @Getter
 @Setter
 public class BlogInfoVo {
-    private int uid;
-    private Date date;
+    private int bid;
+    private Date createDate;
     private String title;
+    private String description;
     private String category;
 }

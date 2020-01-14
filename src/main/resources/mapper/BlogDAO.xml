@@ -13,4 +13,10 @@
         INSERT INTO blog(title, category_id, description, content)
         VALUES(#{title}, #{categoryId}, #{description}, #{content})
     </insert>
+    <select id="select" resultMap="BaseResultMap">
+        SELECT * FROM blog;
+    </select>
+    <select id="selectByCategory" resultMap="BaseResultMap">
+        SELECT * FROM blog WHERE category_id=#{categoryId}
+    </select>
 </mapper>
