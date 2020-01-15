@@ -36,12 +36,7 @@ public class BlogInfoController {
         return Result.ofSuccess(blogService.getCategoryList());
     }
 
-    @ApiOperation("获取博客列表的api接口")
-    @GetMapping("/blogList")
-    public Result blogList() {
-        List<BlogInfoVo> blogInfoVoList = blogService.getBlogList();
-        return Result.ofSuccess(blogInfoVoList);
-    }
+
 
     @ApiOperation("根据分类名获取博客列表")
     @GetMapping("/blogList/{name}")
