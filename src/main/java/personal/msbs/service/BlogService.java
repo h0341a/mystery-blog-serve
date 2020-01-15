@@ -1,8 +1,10 @@
 package personal.msbs.service;
 
 import personal.msbs.model.dto.BlogDto;
+import personal.msbs.model.dto.CommentDto;
 import personal.msbs.model.entity.Blog;
 import personal.msbs.model.entity.Category;
+import personal.msbs.model.entity.Comment;
 import personal.msbs.model.vo.BlogInfoVo;
 import personal.msbs.model.vo.CategoryVo;
 
@@ -44,4 +46,12 @@ public interface BlogService {
      * @return 返回博客内容
      */
     public String getBlog(int bid);
+
+    /**
+     * 添加评论
+     * @param commentDto  提交的评论信息
+     * @return 返回是否添加成功
+     */
+    public Boolean addComment(CommentDto commentDto);
+
 }

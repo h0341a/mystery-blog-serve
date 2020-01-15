@@ -41,10 +41,19 @@ public class Result implements Serializable {
     }
 
     public static Result ofFail(ErrorCodeEnum errorCode){
+        return ofFail(errorCode, errorCode.getMsg());
+    }
+
+    /**
+     * 符合该错误码的错误提供可自定义的提示信息
+     * @param errorCode 错误码
+     * @param customHint 提示信息
+     * @return 错误结果
+     */
+    public static Result ofFail(ErrorCodeEnum errorCode, String customHint){
         Result result = new Result();
-        result.success = false;
-        result.code = errorCode.getCode();
-        result.msg = errorCode.getMsg();
+        result.setCode(errorCode.getCode());
+        result.setMsg(errorCode.getMsg());
         return result;
     }
 

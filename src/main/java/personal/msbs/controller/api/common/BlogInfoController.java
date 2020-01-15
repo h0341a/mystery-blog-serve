@@ -2,16 +2,18 @@ package personal.msbs.controller.api.common;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.*;
+import personal.msbs.model.dto.CommentDto;
 import personal.msbs.model.vo.BlogInfoVo;
 import personal.msbs.model.vo.CategoryVo;
+import personal.msbs.response.ErrorCodeEnum;
 import personal.msbs.response.Result;
 import personal.msbs.service.BlogService;
 
+import java.io.EOFException;
 import java.util.List;
 
 /**
@@ -36,20 +38,37 @@ public class BlogInfoController {
 
     @ApiOperation("获取博客列表的api接口")
     @GetMapping("/blogList")
-    public Result blogList(){
+    public Result blogList() {
         List<BlogInfoVo> blogInfoVoList = blogService.getBlogList();
         return Result.ofSuccess(blogInfoVoList);
     }
 
     @ApiOperation("根据分类名获取博客列表")
     @GetMapping("/blogList/{name}")
-    public Result blogListByCategory(@PathVariable String name){
+    public Result blogListByCategory(@PathVariable String name) {
         List<BlogInfoVo> blogInfoVoList = blogService.getBlogList();
         return Result.ofSuccess(blogInfoVoList);
     }
+
     @ApiOperation("根据博客id获取博客内容")
     @GetMapping("/blog/{bid}")
-    public Result blog(@PathVariable int bid){
+    public Result blog(@PathVariable int bid) {
         return Result.ofSuccess(blogService.getBlog(bid));
+    }
+
+    @ApiOperation("添加评论,如果是回复评论则需要传入被回复评论id")
+    @PostMapping("/blog/{bid}/comment")
+    public Result comment(@PathVariable int bid, CommentDto commentDto) {
+        if (commentDto == null ||
+                StringUtils.isEmpty(commentDto.getNickname()) ||
+                StringUtils.isEmpty(commentDto.getContent())) {
+            return Result.ofFail(ErrorCodeEnum.PARAMETER_NOT_NULL);
+        }
+        commentDto.setBlogId(bid);
+        if(blogService.addComment(commentDto)){
+            return Result.ofSuccess("添加新评论成功");
+        }else{
+            return Result.ofFail(ErrorCodeEnum.COMMENT_INSERT_FAIL);
+        }
     }
 }

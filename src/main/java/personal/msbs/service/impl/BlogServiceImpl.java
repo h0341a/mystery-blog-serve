@@ -3,11 +3,15 @@ package personal.msbs.service.impl;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import personal.msbs.dao.BlogDAO;
 import personal.msbs.dao.CategoryDAO;
+import personal.msbs.dao.CommentDAO;
 import personal.msbs.model.dto.BlogDto;
+import personal.msbs.model.dto.CommentDto;
 import personal.msbs.model.entity.Blog;
 import personal.msbs.model.entity.Category;
+import personal.msbs.model.entity.Comment;
 import personal.msbs.model.vo.BlogInfoVo;
 import personal.msbs.model.vo.CategoryVo;
 import personal.msbs.service.BlogService;
@@ -22,10 +26,12 @@ import java.util.List;
 public class BlogServiceImpl implements BlogService {
     private final BlogDAO blogDao;
     private final CategoryDAO categoryDAO;
+    private final CommentDAO commentDAO;
 
-    public BlogServiceImpl(BlogDAO blogDao, CategoryDAO categoryDAO) {
+    public BlogServiceImpl(BlogDAO blogDao, CategoryDAO categoryDAO, CommentDAO commentDAO) {
         this.blogDao = blogDao;
         this.categoryDAO = categoryDAO;
+        this.commentDAO = commentDAO;
     }
 
     @Override
@@ -57,6 +63,32 @@ public class BlogServiceImpl implements BlogService {
         return blogDao.selectContentById(bid);
     }
 
+    @Override
+    public Boolean addComment(CommentDto commentDto) {
+        //该博客是否存在,通过博客内容是否为空来判断
+        String blogContent = blogDao.selectContentById(commentDto.getBlogId());
+        if (StringUtils.isEmpty(blogContent)){
+            return false;
+        }
+        if (commentDto.getParentCid() != 0){
+            if (commentDAO.selectByCid(commentDto.getParentCid()) == null){
+                return false;
+            }
+        }
+        return commentDAO.insert(commentDtoConvert(commentDto)) == 1;
+    }
+
+    /**
+     * 将commentDto转换为comment
+     * @param commentDto 被转换对象
+     * @return 转换后结果
+     */
+    private Comment commentDtoConvert(CommentDto commentDto){
+        Comment comment = new Comment();
+        BeanUtils.copyProperties(commentDto, comment);
+        return comment;
+    }
+
     /**
      * 将blogDto对象转换为Blog对象
      *
@@ -76,7 +108,6 @@ public class BlogServiceImpl implements BlogService {
         blog.setCategoryId(category.getId());
         //将相同的属性复制到Blog对象中
         BeanUtils.copyProperties(blogDto, blog);
-        System.out.println(blog);
         return blog;
     }
 

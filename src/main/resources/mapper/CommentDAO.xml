@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="personal.msbs.dao.CommentDAO">
+    <resultMap id="BaseResultMap" type="personal.msbs.model.entity.Comment">
+        <result column="cid" property="cid"/>
+        <result column="nickname" property="nickname"/>
+        <result column="email" property="email"/>
+        <result column="content" property="content"/>
+        <result column="blog_id" property="blogId"/>
+        <result column="star_count" property="starCount"/>
+        <result column="parent_cid" property="parentCid"/>
+        <result column="create_date" property="createDate"/>
+    </resultMap>
+    <insert id="insert">
+        INSERT INTO comment(nickname, email, content, blog_id, parent_cid)
+        VALUES (#{nickname}, #{email}, #{content}, #{blogId}, #{parentCid})
+    </insert>
+    <select id="selectByCid" resultMap="BaseResultMap">
+        SELECT * FROM comment WHERE cid=#{cid}
+    </select>
+</mapper>
