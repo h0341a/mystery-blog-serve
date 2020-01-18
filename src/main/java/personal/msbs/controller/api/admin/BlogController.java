@@ -36,6 +36,10 @@ public class BlogController {
     @ApiOperation("获取博客列表的api接口")
     @GetMapping("/blogList")
     public Result blogList() {
+        Object uid = req.getSession().getAttribute("uid");
+        if (uid == null) {
+            return Result.ofFail(ErrorCodeEnum.USER_NOT_LOGIN);
+        }
         List<BlogInfoVo> blogInfoVoList = blogService.getBlogList();
         return Result.ofSuccess(blogInfoVoList);
     }
