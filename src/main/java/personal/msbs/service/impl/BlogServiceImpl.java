@@ -35,6 +35,37 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
+    public boolean alterBlog(int bid, BlogDto blogDto) {
+        //根据博客id查询原有的博客信息
+        Blog blog = blogDao.selectById(bid);
+        if (blog == null){
+            return false;
+        }
+        //将可能会被修改的值赋值到博客对象中
+        if (blogDto.getTitle() != null){
+            blog.setTitle(blogDto.getTitle());
+        }
+        if (blogDto.getContent() != null){
+            blog.setContent(blogDto.getContent());
+        }
+        if (blogDto.getDescription() != null){
+            blog.setDescription(blogDto.getDescription());
+        }
+        //设定修改后的分类
+        if (blogDto.getCategory() != null){
+            Category category = categoryDAO.selectByName(blogDto.getCategory());
+            //如果该分类不存在,那就插入一个新分组
+            if (category == null){
+                category = new Category();
+                category.setName(blogDto.getCategory());
+                categoryDAO.insert(category);
+            }
+            blog.setCategoryId(category.getId());
+        }
+        return blogDao.update(blog) == 1;
+    }
+
+    @Override
     public List<BlogInfoVo> getBlogList() {
         List<Blog> blogList = blogDao.select();
         return blogListConvertBlogVoList(blogList);

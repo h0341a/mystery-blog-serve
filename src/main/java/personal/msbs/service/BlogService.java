@@ -14,6 +14,13 @@ import java.util.List;
  * @author ling
  */
 public interface BlogService {
+    /**
+     * 修改博客内容
+     * @param bid 博客id
+     * @param blogDto 博客信息
+     * @return 返回是否修改成功
+     */
+    public boolean alterBlog(int bid, BlogDto blogDto);
 
     /**
      * 获取博客列表

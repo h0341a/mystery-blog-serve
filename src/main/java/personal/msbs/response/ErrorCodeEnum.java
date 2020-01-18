@@ -17,7 +17,8 @@ public enum  ErrorCodeEnum {
     USER_NOT_LOGIN("403", "用户未登陆"),
     API_NOT_FOUND("404", "系统找不到该路径"),
     BLOG_INSERT_FAIL("501", "博客插入失败"),
-    COMMENT_INSERT_FAIL("502", "添加评论失败")
+    COMMENT_INSERT_FAIL("502", "添加评论失败"),
+    ALTER_BLOG_FAIL("503", "修改博客失败")
     ;
     private String code;
     private String msg;

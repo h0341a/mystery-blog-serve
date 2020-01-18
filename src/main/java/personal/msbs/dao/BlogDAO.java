@@ -17,6 +17,13 @@ public interface BlogDAO {
     public List<Blog> select();
 
     /**
+     * 根据id获取博客信息
+     * @param id 博客id
+     * @return 返回查找到的博客对象
+     */
+    public Blog selectById(int id);
+
+    /**
      * 根据主键即博客id获取博客信息
      * @param bid 博客id
      * @return 返回获取到的博客
@@ -34,4 +41,11 @@ public interface BlogDAO {
      * @return 数据库中受影响的条数
      */
     public int insert(Blog blog);
+
+    /**
+     * 根据博客id修改博客内容
+     * @param blog 博客对象
+     * @return 数据库中受影响的条数
+     */
+    public int update(Blog blog);
 }

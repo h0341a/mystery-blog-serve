@@ -4,10 +4,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import personal.msbs.model.dto.BlogDto;
 import personal.msbs.model.entity.Blog;
 import personal.msbs.model.vo.BlogInfoVo;
@@ -42,6 +39,15 @@ public class BlogController {
         }
         List<BlogInfoVo> blogInfoVoList = blogService.getBlogList();
         return Result.ofSuccess(blogInfoVoList);
+    }
+
+    @ApiOperation("修改博客内容")
+    @PutMapping("/blog/{id}")
+    public Result alterBlog(@PathVariable int id, BlogDto blogDto){
+        if(!blogService.alterBlog(id, blogDto)){
+            return Result.ofFail(ErrorCodeEnum.ALTER_BLOG_FAIL);
+        }
+        return Result.ofSuccess("修改成功");
     }
 
     @PostMapping("/blog")
