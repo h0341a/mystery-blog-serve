@@ -61,7 +61,15 @@ public class UserController {
             req.getSession().invalidate();
             return Result.ofSuccess("注销成功");
         }
-
     }
 
+    @ApiOperation("验证是否登录的接口")
+    @GetMapping("/isLogin")
+    public Result isLogin(){
+        Object uid = req.getSession().getAttribute("uid");
+        if (uid == null){
+            return Result.ofSuccess(false);
+        }
+        return Result.ofSuccess(true);
+    }
 }

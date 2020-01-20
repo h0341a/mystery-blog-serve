@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="personal.msbs.dao.VisitDataDAO">
+    <select id="selectVisitsByOneDay" resultType="int">
+        SELECT COUNT(*) FROM visits WHERE DATE(create_date)=#{date}
+    </select>
+    <select id="selectCommentsByOneDay" resultType="int">
+        SELECT COUNT(*) FROM comment WHERE DATE(create_date)=#{date}
+    </select>
+    <select id="selectStarsByOneDay" resultType="int">
+        SELECT COUNT(*) FROM star WHERE DATE(create_date)=#{date}
+    </select>
+    <select id="selectVisits" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM visits;
+    </select>
+    <select id="selectComments" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM comment;
+    </select>
+    <select id="selectStars" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM star;
+    </select>
+</mapper>
