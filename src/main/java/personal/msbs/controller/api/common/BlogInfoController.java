@@ -41,7 +41,7 @@ public class BlogInfoController {
     @ApiOperation("根据分类名获取博客列表")
     @GetMapping("/blogList/{name}")
     public Result blogListByCategory(@PathVariable String name) {
-        List<BlogInfoVo> blogInfoVoList = blogService.getBlogList();
+        List<BlogInfoVo> blogInfoVoList = blogService.getBlogListByCategory(name);
         return Result.ofSuccess(blogInfoVoList);
     }
 

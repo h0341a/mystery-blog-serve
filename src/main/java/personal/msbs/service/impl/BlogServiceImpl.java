@@ -74,6 +74,9 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public List<BlogInfoVo> getBlogListByCategory(String categoryName) {
         Category category = categoryDAO.selectByName(categoryName);
+        if (category == null){
+            return null;
+        }
         List<Blog> blogListByCategory = blogDao.selectByCategory(category.getId());
         return blogListConvertBlogVoList(blogListByCategory);
     }
