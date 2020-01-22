@@ -35,6 +35,13 @@ public interface BlogDAO {
      * @return 获取到的blog列表
      */
     public List<Blog> selectByCategory(int categoryId);
+
+    /**
+     * 根据id查询标题
+     * @param bid 博客id
+     * @return 博客标题
+     */
+    public String selectTitleById(int bid);
     /**
      * 插入新博客
      * @param blog 博客信息

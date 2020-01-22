@@ -30,4 +30,7 @@
     <select id="selectById" resultMap="BaseResultMap">
         SELECT * FROM blog WHERE bid=#{id}
     </select>
+    <select id="selectTitleById" resultType="java.lang.String">
+        SELECT title FROM blog WHERE bid=#{bid}
+    </select>
 </mapper>

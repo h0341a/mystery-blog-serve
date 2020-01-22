@@ -3,6 +3,8 @@ package personal.msbs.dao;
 import org.springframework.stereotype.Repository;
 import personal.msbs.model.entity.Comment;
 
+import java.util.List;
+
 /**
  * @author ling
  */
@@ -21,4 +23,10 @@ public interface CommentDAO {
      * @return 查询结果
      */
     public Comment selectByCid(int cid);
+
+    /**
+     * 获取全部评论
+     * @return 全部评论
+     */
+    public List<Comment> select();
 }
