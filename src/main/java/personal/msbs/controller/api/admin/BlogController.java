@@ -50,6 +50,16 @@ public class BlogController {
         return Result.ofSuccess("修改成功");
     }
 
+    @ApiOperation("删除博客")
+    @DeleteMapping("/blog/{id}")
+    public Result deleteBlog(@PathVariable int id){
+        if(blogService.deleteBlog(id)){
+            return Result.ofSuccess("删除成功");
+        }
+        return Result.ofFail(ErrorCodeEnum.DELETE_BLOG_FAIL);
+    }
+
+    @ApiOperation("添加新博客")
     @PostMapping("/blog")
     public Result addNewBlog(BlogDto blogDto) {
         Object uid = req.getSession().getAttribute("uid");

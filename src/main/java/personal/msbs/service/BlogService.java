@@ -61,4 +61,11 @@ public interface BlogService {
      */
     public Boolean addComment(CommentDto commentDto);
 
+    /**
+     * 删除博客
+     * @param bid 博客id
+     * @return 删除是否成功
+     */
+    public Boolean deleteBlog(int bid);
+
 }

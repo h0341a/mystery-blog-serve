@@ -18,6 +18,9 @@
                         category_id=#{categoryId}, content=#{content}
         Where bid=#{bid}
     </update>
+    <delete id="delete">
+        DELETE FROM blog WHERE bid=#{bid}
+    </delete>
     <select id="select" resultMap="BaseResultMap">
         SELECT * FROM blog;
     </select>

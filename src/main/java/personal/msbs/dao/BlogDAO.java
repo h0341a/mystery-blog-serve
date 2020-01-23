@@ -55,4 +55,11 @@ public interface BlogDAO {
      * @return 数据库中受影响的条数
      */
     public int update(Blog blog);
+
+    /**
+     * 根据博客id删除博客
+     * @param bid 博客id
+     * @return 数据库中受影响的条数
+     */
+    public int delete(int bid);
 }

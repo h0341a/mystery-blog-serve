@@ -38,24 +38,24 @@ public class BlogServiceImpl implements BlogService {
     public boolean alterBlog(int bid, BlogDto blogDto) {
         //根据博客id查询原有的博客信息
         Blog blog = blogDao.selectById(bid);
-        if (blog == null){
+        if (blog == null) {
             return false;
         }
         //将可能会被修改的值赋值到博客对象中
-        if (blogDto.getTitle() != null){
+        if (blogDto.getTitle() != null) {
             blog.setTitle(blogDto.getTitle());
         }
-        if (blogDto.getContent() != null){
+        if (blogDto.getContent() != null) {
             blog.setContent(blogDto.getContent());
         }
-        if (blogDto.getDescription() != null){
+        if (blogDto.getDescription() != null) {
             blog.setDescription(blogDto.getDescription());
         }
         //设定修改后的分类
-        if (blogDto.getCategory() != null){
+        if (blogDto.getCategory() != null) {
             Category category = categoryDAO.selectByName(blogDto.getCategory());
             //如果该分类不存在,那就插入一个新分组
-            if (category == null){
+            if (category == null) {
                 category = new Category();
                 category.setName(blogDto.getCategory());
                 categoryDAO.insert(category);
@@ -74,7 +74,7 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public List<BlogInfoVo> getBlogListByCategory(String categoryName) {
         Category category = categoryDAO.selectByName(categoryName);
-        if (category == null){
+        if (category == null) {
             return null;
         }
         List<Blog> blogListByCategory = blogDao.selectByCategory(category.getId());
@@ -101,23 +101,29 @@ public class BlogServiceImpl implements BlogService {
     public Boolean addComment(CommentDto commentDto) {
         //该博客是否存在,通过博客内容是否为空来判断
         String blogContent = blogDao.selectContentById(commentDto.getBlogId());
-        if (StringUtils.isEmpty(blogContent)){
+        if (StringUtils.isEmpty(blogContent)) {
             return false;
         }
-        if (commentDto.getParentCid() != 0){
-            if (commentDAO.selectByCid(commentDto.getParentCid()) == null){
+        if (commentDto.getParentCid() != 0) {
+            if (commentDAO.selectByCid(commentDto.getParentCid()) == null) {
                 return false;
             }
         }
         return commentDAO.insert(commentDtoConvert(commentDto)) == 1;
     }
 
+    @Override
+    public Boolean deleteBlog(int bid) {
+        return blogDao.delete(bid) == 1;
+    }
+
     /**
      * 将commentDto转换为comment
+     *
      * @param commentDto 被转换对象
      * @return 转换后结果
      */
-    private Comment commentDtoConvert(CommentDto commentDto){
+    private Comment commentDtoConvert(CommentDto commentDto) {
         Comment comment = new Comment();
         BeanUtils.copyProperties(commentDto, comment);
         return comment;
@@ -147,10 +153,11 @@ public class BlogServiceImpl implements BlogService {
 
     /**
      * 将博客列表转换为blogVo列表
+     *
      * @param blogList 博客列表
      * @return blogVo列表
      */
-    private List<BlogInfoVo> blogListConvertBlogVoList(List<Blog> blogList){
+    private List<BlogInfoVo> blogListConvertBlogVoList(List<Blog> blogList) {
         if (blogList == null) {
             return null;
         }

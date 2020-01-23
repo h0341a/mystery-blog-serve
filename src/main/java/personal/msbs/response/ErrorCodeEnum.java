@@ -18,7 +18,8 @@ public enum  ErrorCodeEnum {
     API_NOT_FOUND("404", "系统找不到该路径"),
     BLOG_INSERT_FAIL("501", "博客插入失败"),
     COMMENT_INSERT_FAIL("502", "添加评论失败"),
-    ALTER_BLOG_FAIL("503", "修改博客失败")
+    ALTER_BLOG_FAIL("503", "修改博客失败"),
+    DELETE_BLOG_FAIL("504", "删除博客失败")
     ;
     private String code;
     private String msg;
